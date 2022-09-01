@@ -1,0 +1,6 @@
+# 메뉴 리뉴얼
+def solution(orders, course):
+    answer = []
+    return answer
+
+print(solution(["ABCFG", "AC", "CDE", "ACDE", "BCFG", "ACDEH"], [2,3,4]))

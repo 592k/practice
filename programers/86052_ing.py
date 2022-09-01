@@ -47,25 +47,38 @@ def S(D):
 def solution(grid):
     m = 0
     n = 0
-    c = 0
     D_ = []
     P = []
-    for x,y in [[0, 1], [1, 0], [-1, 0], [0, -1]]:
-        T = [[m,n],[x,y]]
-        D = [[m,n],[x,y]]
-        while T != D or D not in P:
-            A = grid[x][y]
-            if A == 'R':
-                D_ = [[x,y],R(D)]
-            elif A == 'L':
-                D_ = [[x,y],L(D)]
-            elif A == 'S':
-                D_ = [[x,y],S(D)]
-            
-            D = D_
-
-
     answer = []
+    l = len(grid)
+    for i in [[0, 1], [1, 0], [-1, 0], [0, -1]]:
+        D = [[m,n],i]
+        if D not in P:
+            while D_ != D or D not in P:
+                if D[1][0] >= l:
+                    D[1][0] -= l
+                elif D[1][0] < -l:
+                    D[1][0] += l
+
+                if D[1][1] >= l:
+                    D[1][1] -= l
+                elif D[1][1] < -l:
+                    D[1][1] += l
+
+                A = grid[D[1][0]][D[1][1]]
+                P.append(D)
+                x,y = D[1]
+
+                if A == 'R':
+                    D_ = [[x,y],R(D)]
+                elif A == 'L':
+                    D_ = [[x,y],L(D)]
+                elif A == 'S':
+                    D_ = [[x,y],S(D)]
+                
+                D = D_
+            answer.append(len(P))
+
     return answer
 # length 보다 over하는 location 조절 해야함!
 
